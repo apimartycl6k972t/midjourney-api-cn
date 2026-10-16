@@ -10,20 +10,22 @@
   <img src="assets/01-product-hero-perfume.jpg" width="820" alt="Sample render via the APIMart image API">
 </p>
 
-> **from $0.04504 per image** (imagine $0.04504 · imagine-niji6 $0.04504 · imagine-niji7 $0.04504) — one OpenAI-compatible endpoint at `https://api.apimart.ai/v1`, no monthly plan required. *(observed 2026-10-12)*
+> **from $0.045 per image** on the APIMart route — 一个 OpenAI 兼容端点 `https://api.apimart.ai/v1`，无需包月套餐。*(数据观测于 2026-10-12)*
 
-**[Get an API key](https://go.apimart.ai/k-7a4458)** · **[Live pricing](https://go.apimart.ai/k-34befe)** · **[Model page](https://go.apimart.ai/k-f4b2e8)** · [⚡ 60-second quickstart](#quickstart)
+**[获取 API Key](https://go.apimart.ai/k-7a4458)** · **[实时价格](https://go.apimart.ai/k-34befe)** · **[模型页面](https://go.apimart.ai/k-f4b2e8)** · [⚡ 60 秒快速上手](#quickstart)
 
-**Why teams call Midjourney (`midjourney`) through APIMart**
+**为什么团队通过 APIMart 调用 Midjourney（`midjourney`）**
 
-- **One key, entire catalog.** The same `https://api.apimart.ai/v1` base URL and `Authorization` header reach Midjourney (`midjourney`) and 300+ other image, video and language models — switch the `model` field, not your client.
-- **$1 minimum, pay as you go.** No subscription and no prepaid plan to size up front: top up from $1 and spend it on calls.
-- **The charge comes back in the response.** Every completed task reports the amount billed (`cost` / `credits_cost`); a task marked `failed` is refunded.
-- **Async by design.** Submit, take the `task_id`, poll `GET /v1/tasks/{id}` — batching and retries are ordinary queue work, not a bespoke integration.
+- **一个 Key，整个目录。**同一个 `https://api.apimart.ai/v1` base URL 和 `Authorization` 请求头即可访问 Midjourney（`midjourney`）以及图像、视频、语言等 300+ 模型——只需切换 `model` 字段，客户端无需改动。
+- **$1 起充，按量付费。**没有订阅、也没有需要预先估算用量的预付费套餐：最低充值 $1，调用多少扣多少。
+- **费用随响应一并返回。**每个完成的任务都会报告实际计费金额（`cost` / `credits_cost`）；状态为 `failed` 的任务会自动退款。
+- **原生异步设计。**提交任务、拿到 `task_id`、轮询 `GET /v1/tasks/{id}`——批处理和重试都是普通的队列工作，不需要定制集成。
 
 <!-- /conv-kit:v1 -->
 
-Midjourney on APIMart: imagine, blend, upscale, pan and zoom through one OpenAI-compatible endpoint, priced per call.
+
+
+Midjourney is the industry-leading text-to-image engine, prized for its painterly aesthetic, strong composition, and signature lighting. APIMart exposes Midjourney as a programmable API — call /v1/midjourney/generations for the default Imagine flow, choose v8.1, v7, v6.1, v5.2, v5.1 or Niji 7 / Niji 6, dial in stylize / chaos / weird, and run on relax, fast, or turbo queues without touching Discord.
 
 ## Model id and routes
 
@@ -31,17 +33,90 @@ Midjourney on APIMart: imagine, blend, upscale, pan and zoom through one OpenAI-
 | --- | --- | --- | --- |
 | Per-image | `midjourney` | per delivered image, by resolution | see the [model page](https://go.apimart.ai/k-f4b2e8) for the exact tiers |
 
-Endpoint: `POST https://api.apimart.ai/v1/images/generations` (OpenAI-compatible), then poll `GET /v1/tasks/{task_id}`.
+Endpoint: `POST https://api.apimart.ai/v1/images/generations`, then poll `GET /v1/tasks/{task_id}`.
 
 ## Pricing
 
 <!-- pricing:model:start -->
 | Output | List price | Effective price |
 | --- | --- | --- |
-| default | $0.0375 | $0.03 |
-| 4K | $0.05 | $0.04 |
+| default | 0.0563 | 0.04504 |
+| blend | 0.0688 | 0.05504 |
+| blend-fast | 0.0688 | 0.05504 |
+| blend-turbo | 0.125 | 0.1 |
+| describe | 0.0688 | 0.05504 |
+| describe-fast | 0.0688 | 0.05504 |
+| describe-turbo | 0.125 | 0.1 |
+| edits | 0.0688 | 0.05504 |
+| edits-fast | 0.0688 | 0.05504 |
+| edits-turbo | 0.125 | 0.1 |
+| high_variation | 0.0688 | 0.05504 |
+| high_variation-fast | 0.0688 | 0.05504 |
+| high_variation-turbo | 0.125 | 0.1 |
+| imagine | 0.0563 | 0.04504 |
+| imagine-fast | 0.0688 | 0.05504 |
+| imagine-niji6 | 0.0563 | 0.04504 |
+| imagine-niji6-fast | 0.0688 | 0.05504 |
+| imagine-niji6-turbo | 0.125 | 0.1 |
+| imagine-niji7 | 0.0563 | 0.04504 |
+| imagine-niji7-fast | 0.0688 | 0.05504 |
+| imagine-niji7-turbo | 0.125 | 0.1 |
+| imagine-turbo | 0.125 | 0.1 |
+| imagine-v5.1 | 0.0563 | 0.04504 |
+| imagine-v5.1-fast | 0.0688 | 0.05504 |
+| imagine-v5.1-turbo | 0.125 | 0.1 |
+| imagine-v5.2 | 0.0563 | 0.04504 |
+| imagine-v5.2-fast | 0.0688 | 0.05504 |
+| imagine-v5.2-turbo | 0.125 | 0.1 |
+| imagine-v6.1 | 0.0563 | 0.04504 |
+| imagine-v6.1-fast | 0.0688 | 0.05504 |
+| imagine-v6.1-turbo | 0.125 | 0.1 |
+| imagine-v7 | 0.0563 | 0.04504 |
+| imagine-v7-fast | 0.0688 | 0.05504 |
+| imagine-v7-turbo | 0.125 | 0.1 |
+| imagine-v8.1 | 0.0563 | 0.04504 |
+| imagine-v8.1-fast | 0.0688 | 0.05504 |
+| imagine-v8.1-turbo | 0.125 | 0.1 |
+| imagine-v8.2 | 0.0563 | 0.04504 |
+| imagine-v8.2-fast | 0.0688 | 0.05504 |
+| imagine-v8.2-turbo | 0.125 | 0.1 |
+| inpaint | 0.0688 | 0.05504 |
+| inpaint-fast | 0.0688 | 0.05504 |
+| inpaint-turbo | 0.125 | 0.1 |
+| low_variation | 0.0688 | 0.05504 |
+| low_variation-fast | 0.0688 | 0.05504 |
+| low_variation-turbo | 0.125 | 0.1 |
+| modal | 0.0688 | 0.05504 |
+| modal-fast | 0.0688 | 0.05504 |
+| modal-turbo | 0.125 | 0.1 |
+| pan | 0.0688 | 0.05504 |
+| pan-fast | 0.0688 | 0.05504 |
+| pan-turbo | 0.125 | 0.1 |
+| remix_strong | 0.0688 | 0.05504 |
+| remix_strong-fast | 0.0688 | 0.05504 |
+| remix_strong-turbo | 0.125 | 0.1 |
+| remix_subtle | 0.0688 | 0.05504 |
+| remix_subtle-fast | 0.0688 | 0.05504 |
+| remix_subtle-turbo | 0.125 | 0.1 |
+| reroll | 0.0688 | 0.05504 |
+| reroll-fast | 0.0688 | 0.05504 |
+| reroll-turbo | 0.125 | 0.1 |
+| shorten | 0.0688 | 0.05504 |
+| shorten-fast | 0.0688 | 0.05504 |
+| shorten-turbo | 0.125 | 0.1 |
+| upscale-hd | 0.0688 | 0.05504 |
+| upscale-hd-fast | 0.0688 | 0.05504 |
+| upscale-hd-turbo | 0.125 | 0.1 |
+| variation | 0.0688 | 0.05504 |
+| variation-fast | 0.0688 | 0.05504 |
+| variation-turbo | 0.125 | 0.1 |
+| video | 0.25 | 0.2 |
+| video-720p | 0.5 | 0.4 |
+| zoom | 0.0688 | 0.05504 |
+| zoom-fast | 0.0688 | 0.05504 |
+| zoom-turbo | 0.125 | 0.1 |
 
-The token-billed official route bills per million tokens instead: `text_input` $1.60, `cached_text_input` free, `image_input` $1.60, `cached_image_input` free, `text_output` $9.60, `image_output` $96.00.
+
 <!-- pricing:model:end -->
 
 Prices are a snapshot; the [pricing page](https://go.apimart.ai/k-34befe) and [`data/model.json`](data/model.json) are refreshed by CI, and a completed task reports the exact amount in its `cost` field.
@@ -58,7 +133,7 @@ Prices are a snapshot; the [pricing page](https://go.apimart.ai/k-34befe) and [`
 | `image_urls` | string[] | — | reference images as public HTTP(S) URLs or base64 data URLs |
 | `nsfw_check` | boolean | `false` | runs `omni-moderation-latest` before submitting |
 
-The table lists the fields accepted by the APIMart OpenAI-compatible image endpoint. Check the [model page](https://go.apimart.ai/k-f4b2e8) for anything this model adds on top.
+The table lists the fields accepted by the APIMart `images/generations` endpoint. Check the [model page](https://go.apimart.ai/k-f4b2e8) for anything this model adds on top.
 
 ## Quickstart
 
@@ -91,17 +166,28 @@ Runnable versions: [`examples/`](examples). The task lifecycle is `pending → p
 
 ## FAQ
 
-**What is the Midjourney model id?**
+**Midjourney 的模型 id 是什么？**
 
-`midjourney`. See the route table above.
+`midjourney`。见上方路由表。
 
-**How is it billed?**
+**如何计费？**
 
-**from $0.04504 per image** (imagine $0.04504 · imagine-niji6 $0.04504 · imagine-niji7 $0.04504). The completed task reports the exact amount in its `cost` field; a failed task is refunded.
+**from $0.045 per image** on the APIMart route。完成的任务会在 `cost` 字段中给出准确金额；失败的任务会自动退款。
 
 **How do I get a key?**
 
 Use the [Get an API key](https://go.apimart.ai/k-7a4458) link — $1 minimum top-up, no plan required.
+
+<!-- related-repos:auto -->
+## Related repositories
+
+- **Same model, this language** — the other half of this pair: [midjourney-prompts-cn](https://github.com/apimartycl6k972t/midjourney-prompts-cn)
+- **Same model, other languages** — 9 more language builds: Deutsch [midjourney-api-de](https://github.com/h5fd0cofy/midjourney-api-de) · Español [midjourney-api-es](https://github.com/xbuu0/midjourney-api-es) · Français [midjourney-api-fr](https://github.com/apimartt1q/midjourney-api-fr) · Relay/gateway [midjourney-api-gateway](https://github.com/apimartxc3iskw/midjourney-api-gateway) · Bahasa [midjourney-api-id](https://github.com/cvrwq0/midjourney-api-id) · 日本語 [midjourney-api-ja](https://github.com/apimartt1q/midjourney-api-ja) · 한국어 [midjourney-api-ko](https://github.com/ocvewn2-9ueo/midjourney-api-ko) · Português [midjourney-api-pt](https://github.com/l-ca0/midjourney-api-pt) · Русский [midjourney-api-ru](https://github.com/sfpxvicw/midjourney-api-ru)
+- **More models in this language** — [gemini-2-5-flash-image-preview-api-cn](https://github.com/hm-5j/gemini-2-5-flash-image-preview-api-cn) · [nano-banana-api-cn](https://github.com/mpflv/nano-banana-api-cn) · [gemini-3-1-flash-image-preview-api-cn](https://github.com/utp00/gemini-3-1-flash-image-preview-api-cn) · [nano-banana-2-api-cn](https://github.com/i3hxnu6/nano-banana-2-api-cn) · [gemini-3-pro-image-preview-api-cn](https://github.com/vd0tv42d/gemini-3-pro-image-preview-api-cn) · [nano-banana-pro-api-cn](https://github.com/j2pnwx3z8juf/nano-banana-pro-api-cn)
+- **Topic hubs** — every build of this model, all languages: [midjourney](https://github.com/topics/midjourney) · [midjourney-api](https://github.com/topics/midjourney-api)
+
+This repository is one build in a cross-linked set of API guides for the same model family; each language build links back to the others.
+<!-- /related-repos:auto -->
 
 ## Attributed links (how this repository is measured)
 
